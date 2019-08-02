@@ -1,0 +1,1410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>OPSHOP_ADMIN_UI_AutoTest_Report</title>
+    <meta name="generator" content="HTMLTestRunner 0.9.1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.common.min.js"></script>
+    <!-- <script type="text/javascript" src="js/echarts.common.min.js"></script> -->
+    
+    
+<style type="text/css" media="screen">
+    body        { font-family: Microsoft YaHei,Consolas,arial,sans-serif; font-size: 80%; }
+    table       { font-size: 100%; }
+    pre         { white-space: pre-wrap;word-wrap: break-word; }
+
+    /* -- heading ---------------------------------------------------------------------- */
+    h1 {
+        font-size: 16pt;
+        color: gray;
+    }
+    .heading {
+        margin-top: 0ex;
+        margin-bottom: 1ex;
+    }
+
+    .heading .attribute {
+        margin-top: 1ex;
+        margin-bottom: 0;
+    }
+
+    .heading .description {
+        margin-top: 2ex;
+        margin-bottom: 3ex;
+    }
+
+    /* -- css div popup ------------------------------------------------------------------------ */
+    a.popup_link {
+    }
+
+    a.popup_link:hover {
+        color: red;
+    }
+
+    .popup_window {
+        display: none;
+        position: relative;
+        left: 0px;
+        top: 0px;
+        /*border: solid #627173 1px; */
+        padding: 10px;
+        /*background-color: #E6E6D6; */
+        font-family: "Lucida Console", "Courier New", Courier, monospace;
+        text-align: left;
+        font-size: 8pt;
+        /* width: 500px;*/
+    }
+
+    }
+    /* -- report ------------------------------------------------------------------------ */
+    #show_detail_line {
+        margin-top: 3ex;
+        margin-bottom: 1ex;
+    }
+    #result_table {
+        width: 99%;
+    }
+    #header_row {
+        font-weight: bold;
+        color: #303641;
+        background-color: #ebebeb;
+    }
+    #total_row  { font-weight: bold; }
+    .passClass  { background-color: #bdedbc; }
+    .failClass  { background-color: #ffefa4; }
+    .errorClass { background-color: #ffc9c9; }
+    .passCase   { color: #6c6; }
+    .failCase   { color: #FF6600; font-weight: bold; }
+    .errorCase  { color: #c00; font-weight: bold; }
+    .hiddenRow  { display: none; }
+    .testcase   { margin-left: 2em; }
+
+
+    /* -- ending ---------------------------------------------------------------------- */
+    #ending {
+    }
+
+    #div_base {
+                position:absolute;
+                top:0%;
+                left:5%;
+                right:5%;
+                width: auto;
+                height: auto;
+                margin: -15px 0 0 0;
+    }
+</style>
+
+    
+</head>
+<body>
+    <script language="javascript" type="text/javascript"><!--
+    output_list = Array();
+
+    /* level - 0:Summary; 1:Failed; 2:All */
+    function showCase(level) {
+        trs = document.getElementsByTagName("tr");
+        for (var i = 0; i < trs.length; i++) {
+            tr = trs[i];
+            id = tr.id;
+            if (id.substr(0,2) == 'ft') {
+                if (level < 1) {
+                    tr.className = 'hiddenRow';
+                }
+                else {
+                    tr.className = '';
+                }
+            }
+            if (id.substr(0,2) == 'pt') {
+                if (level > 1) {
+                    tr.className = '';
+                }
+                else {
+                    tr.className = 'hiddenRow';
+                }
+            }
+        }
+    }
+
+
+    function showClassDetail(cid, count) {
+        var id_list = Array(count);
+        var toHide = 1;
+        for (var i = 0; i < count; i++) {
+            tid0 = 't' + cid.substr(1) + '.' + (i+1);
+            tid = 'f' + tid0;
+            tr = document.getElementById(tid);
+            if (!tr) {
+                tid = 'p' + tid0;
+                tr = document.getElementById(tid);
+            }
+            id_list[i] = tid;
+            if (tr.className) {
+                toHide = 0;
+            }
+        }
+        for (var i = 0; i < count; i++) {
+            tid = id_list[i];
+            if (toHide) {
+                document.getElementById('div_'+tid).style.display = 'none'
+                document.getElementById(tid).className = 'hiddenRow';
+            }
+            else {
+                document.getElementById(tid).className = '';
+            }
+        }
+    }
+
+
+    function showTestDetail(div_id){
+        var details_div = document.getElementById(div_id)
+        var displayState = details_div.style.display
+        // alert(displayState)
+        if (displayState != 'block' ) {
+            displayState = 'block'
+            details_div.style.display = 'block'
+        }
+        else {
+            details_div.style.display = 'none'
+        }
+    }
+
+
+    function html_escape(s) {
+        s = s.replace(/&/g,'&amp;');
+        s = s.replace(/</g,'&lt;');
+        s = s.replace(/>/g,'&gt;');
+        return s;
+    }
+
+    /* obsoleted by detail in <div>
+    function showOutput(id, name) {
+        var w = window.open("", //url
+                        name,
+                        "resizable,scrollbars,status,width=800,height=450");
+        d = w.document;
+        d.write("<pre>");
+        d.write(html_escape(output_list[id]));
+        d.write("\n");
+        d.write("<a href='javascript:window.close()'>close</a>\n");
+        d.write("</pre>\n");
+        d.close();
+    }
+    */
+    --></script>
+
+    <div id="div_base">
+        
+    <div class='page-header'>
+        <h1>OPSHOP_ADMIN_UI_AutoTest_Report</h1>
+    <p class='attribute'><strong>开始时间:</strong> 2019-07-10 15:49:42</p>
+<p class='attribute'><strong>运行时长:</strong> 0:06:29.492790</p>
+<p class='attribute'><strong>状态:</strong> 通过 25 错误 29</p>
+
+    </div>
+    <div style="float: left;width:50%;"><p class='description'>自定义场景测试报告</p></div>
+    <div id="chart" style="width:50%;height:400px;float:left;"></div>
+
+        
+    <div class="btn-group btn-group-sm">
+        <button class="btn btn-default" onclick='javascript:showCase(0)'>总结</button>
+        <button class="btn btn-default" onclick='javascript:showCase(1)'>失败</button>
+        <button class="btn btn-default" onclick='javascript:showCase(2)'>全部</button>
+    </div>
+    <p></p>
+    <table id='result_table' class="table table-bordered">
+        <colgroup>
+            <col align='left' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+        </colgroup>
+        <tr id='header_row'>
+            <td>测试套件/测试用例</td>
+            <td>总数</td>
+            <td>通过</td>
+            <td>失败</td>
+            <td>错误</td>
+            <td>查看</td>
+        </tr>
+        
+    <tr class='errorClass'>
+        <td>src.test.case.test_mainMenu.TestMainMenu</td>
+        <td>47</td>
+        <td>22</td>
+        <td>0</td>
+        <td>25</td>
+        <td><a href="javascript:showClassDetail('c1',47)">详情</a></td>
+    </tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_opshopImg</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_member</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_product</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_order</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_datastatistics</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_couponList</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_operation</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_dictionary</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_setting</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_backend</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_imagesearch</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='ft1.12' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_productlist</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.12')" >
+        错误</a>
+
+    <div id='div_ft1.12' class="popup_window">
+        <pre>ft1.12: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 89, in test_into_productlist
+    self.page.click_productlist()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 139, in click_productlist
+    self.click_product()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 105, in click_product
+    self.find_element(*self.product).click()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;div class="el-submenu__title" style="padding-left: 20px; color: rgb(255, 255, 255);"&gt;...&lt;/div&gt; is not clickable at point (87, 146). Other element would receive the click: &lt;div class="el-loading-mask el-loading-fade-leave-active el-loading-fade-leave-to" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.13' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_mymember</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.13')" >
+        错误</a>
+
+    <div id='div_ft1.13' class="popup_window">
+        <pre>ft1.13: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 83, in test_into_mymember
+    self.page.click_mymember()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 129, in click_mymember
+    self.click_member()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 103, in click_member
+    self.find_element(*self.member).click()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;div class="el-submenu__title" style="padding-left: 20px; color: rgb(255, 255, 255);"&gt;...&lt;/div&gt; is not clickable at point (87, 90). Other element would receive the click: &lt;div class="el-loading-mask el-loading-fade-leave-active el-loading-fade-leave-to" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.14' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_productSpecification</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='ft1.15' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_memberReview</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.15')" >
+        错误</a>
+
+    <div id='div_ft1.15' class="popup_window">
+        <pre>ft1.15: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 85, in test_into_memberReview
+    self.page.click_memberReview()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 135, in click_memberReview
+    self.find_element(*self.memberReview).click()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementNotInteractableException: Message: element not interactable
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.16' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_productAttribute</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.16')" >
+        错误</a>
+
+    <div id='div_ft1.16' class="popup_window">
+        <pre>ft1.16: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 93, in test_into_productAttribute
+    self.page.click_productAttribute()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 149, in click_productAttribute
+    self.find_element(*self.productAttribute).click()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementNotInteractableException: Message: element not interactable
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.17' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_mymember</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='ft1.18' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_productCollection</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.18')" >
+        错误</a>
+
+    <div id='div_ft1.18' class="popup_window">
+        <pre>ft1.18: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 95, in test_into_productCollection
+    self.page.click_productCollection()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 153, in click_productCollection
+    self.find_element(*self.productCollection).click()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementNotInteractableException: Message: element not interactable
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.19' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_mymember</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.19')" >
+        错误</a>
+
+    <div id='div_ft1.19' class="popup_window">
+        <pre>ft1.19: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 83, in test_into_mymember
+    self.page.click_mymember()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 131, in click_mymember
+    self.find_element(*self.mymenber).click()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementNotInteractableException: Message: element not interactable
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.20' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_productPreQc</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='ft1.21' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_memberlist</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.21')" >
+        错误</a>
+
+    <div id='div_ft1.21' class="popup_window">
+        <pre>ft1.21: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 81, in test_into_memberlist
+    self.page.click_memberlist()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 127, in click_memberlist
+    self.find_element(*self.menberlist).click()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementNotInteractableException: Message: element not interactable
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.22' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_sleep</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='ft1.23' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_productStore</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.23')" >
+        错误</a>
+
+    <div id='div_ft1.23' class="popup_window">
+        <pre>ft1.23: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 97, in test_into_productStore
+    self.page.click_productStore ()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 157, in click_productStore
+    self.find_element(*self.productStore).click()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementNotInteractableException: Message: element not interactable
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.24' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_orderList</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.25' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_orderReview</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.26' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_couponStatistics</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.27' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_PromotionStatistics</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.28' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_shareCount</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='ft1.29' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_abnormalOrder</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.29')" >
+        错误</a>
+
+    <div id='div_ft1.29' class="popup_window">
+        <pre>ft1.29: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 107, in test_into_abnormalOrder
+    self.page.click_abnormalOrder()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 175, in click_abnormalOrder
+    self.find_element(*self.abnormalOrder).click()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementNotInteractableException: Message: element not interactable
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.30' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_homepageSettings</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='ft1.31' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_guidePage</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.31')" >
+        错误</a>
+
+    <div id='div_ft1.31' class="popup_window">
+        <pre>ft1.31: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 123, in test_into_guidePage
+    self.page.click_guidePage()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 202, in click_guidePage
+    self.find_element(*self.guidePage).click()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;li data-v-6248e80c="" role="menuitem" tabindex="-1" class="el-menu-item" style="padding-left: 40px; color: rgb(255, 255, 255);"&gt;...&lt;/li&gt; is not clickable at point (88, 655). Other element would receive the click: &lt;div class="el-loading-mask" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.32' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_pushMessage</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.32')" >
+        错误</a>
+
+    <div id='div_ft1.32' class="popup_window">
+        <pre>ft1.32: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 125, in test_into_pushMessage
+    self.page.click_pushMessage()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 204, in click_pushMessage
+    self.click_operation()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 115, in click_operation
+    self.find_element (*self.operation).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;span&gt;...&lt;/span&gt; is not clickable at point (50, 503). Other element would receive the click: &lt;div class="el-loading-mask" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.33' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_frontendCategory</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.33')" >
+        错误</a>
+
+    <div id='div_ft1.33' class="popup_window">
+        <pre>ft1.33: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 119, in test_into_frontendCategory
+    self.page.click_frontendCategory()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 192, in click_frontendCategory
+    self.click_operation()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 115, in click_operation
+    self.find_element (*self.operation).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;span&gt;...&lt;/span&gt; is not clickable at point (50, 503). Other element would receive the click: &lt;div class="el-loading-mask" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.34' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_dataDictionary</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.34')" >
+        错误</a>
+
+    <div id='div_ft1.34' class="popup_window">
+        <pre>ft1.34: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 147, in test_into_dataDictionary
+    self.page.click_dataDictionary()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 243, in click_dataDictionary
+    self.click_backend()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 121, in click_backend
+    self.find_element (*self.backend).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;div class="el-submenu__title" style="padding-left: 20px; color: rgb(255, 255, 255);"&gt;...&lt;/div&gt; is not clickable at point (87, 844). Other element would receive the click: &lt;div class="el-loading-mask" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.35' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_userlist</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.35')" >
+        错误</a>
+
+    <div id='div_ft1.35' class="popup_window">
+        <pre>ft1.35: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 149, in test_into_userlist
+    self.page.click_userlist()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 247, in click_userlist
+    self.click_backend()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 121, in click_backend
+    self.find_element (*self.backend).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;div class="el-submenu__title" style="padding-left: 20px; color: rgb(255, 255, 255);"&gt;...&lt;/div&gt; is not clickable at point (87, 844). Other element would receive the click: &lt;div class="el-loading-mask" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.36' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_rolemanage</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.36')" >
+        错误</a>
+
+    <div id='div_ft1.36' class="popup_window">
+        <pre>ft1.36: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 151, in test_into_rolemanage
+    self.page.click_rolemanage()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 251, in click_rolemanage
+    self.click_backend()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 121, in click_backend
+    self.find_element (*self.backend).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;div class="el-submenu__title" style="padding-left: 20px; color: rgb(255, 255, 255);"&gt;...&lt;/div&gt; is not clickable at point (87, 844). Other element would receive the click: &lt;div class="el-loading-mask el-loading-fade-leave el-loading-fade-leave-active" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.37' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_menumanage</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.37')" >
+        错误</a>
+
+    <div id='div_ft1.37' class="popup_window">
+        <pre>ft1.37: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 153, in test_into_menumanage
+    self.page.click_menumanage()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 255, in click_menumanage
+    self.click_backend()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 121, in click_backend
+    self.find_element (*self.backend).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;div class="el-submenu__title" style="padding-left: 20px; color: rgb(255, 255, 255);"&gt;...&lt;/div&gt; is not clickable at point (87, 844). Other element would receive the click: &lt;div class="el-loading-mask el-loading-fade-leave el-loading-fade-leave-active" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.38' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_operationLogs</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.38')" >
+        错误</a>
+
+    <div id='div_ft1.38' class="popup_window">
+        <pre>ft1.38: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 155, in test_into_operationLogs
+    self.page.click_operationLogs()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 259, in click_operationLogs
+    self.click_backend()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 121, in click_backend
+    self.find_element (*self.backend).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;div class="el-submenu__title" style="padding-left: 20px; color: rgb(255, 255, 255);"&gt;...&lt;/div&gt; is not clickable at point (87, 844). Other element would receive the click: &lt;div class="el-loading-mask el-loading-fade-leave-active el-loading-fade-leave-to" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.39' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_frontendCategory</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.39')" >
+        错误</a>
+
+    <div id='div_ft1.39' class="popup_window">
+        <pre>ft1.39: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 119, in test_into_frontendCategory
+    self.page.click_frontendCategory()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 192, in click_frontendCategory
+    self.click_operation()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 115, in click_operation
+    self.find_element (*self.operation).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;span&gt;...&lt;/span&gt; is not clickable at point (50, 477). Other element would receive the click: &lt;div class="el-loading-mask el-loading-fade-leave-active el-loading-fade-leave-to" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.40' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_externalCategory</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.40')" >
+        错误</a>
+
+    <div id='div_ft1.40' class="popup_window">
+        <pre>ft1.40: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 131, in test_into_externalCategory
+    self.page.click_externalCategory()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 214, in click_externalCategory
+    self.click_settings()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 119, in click_settings
+    self.find_element (*self.settings).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;span&gt;...&lt;/span&gt; is not clickable at point (45, 789). Other element would receive the click: &lt;div class="el-loading-mask el-loading-fade-leave-active el-loading-fade-leave-to" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.41' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_areaManage</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.41')" >
+        错误</a>
+
+    <div id='div_ft1.41' class="popup_window">
+        <pre>ft1.41: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 133, in test_into_areaManage
+    self.page.click_areaManage()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 218, in click_areaManage
+    self.click_settings()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 119, in click_settings
+    self.find_element (*self.settings).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;span&gt;...&lt;/span&gt; is not clickable at point (45, 789). Other element would receive the click: &lt;div class="el-loading-mask el-loading-fade-leave-active el-loading-fade-leave-to" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.42' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_countryList</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.42')" >
+        错误</a>
+
+    <div id='div_ft1.42' class="popup_window">
+        <pre>ft1.42: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 135, in test_into_countryList
+    self.page.click_countryList()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 222, in click_countryList
+    self.click_settings()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 119, in click_settings
+    self.find_element (*self.settings).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;span&gt;...&lt;/span&gt; is not clickable at point (45, 789). Other element would receive the click: &lt;div class="el-loading-mask el-loading-fade-leave-active el-loading-fade-leave-to" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.43' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_currencyList</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.43')" >
+        错误</a>
+
+    <div id='div_ft1.43' class="popup_window">
+        <pre>ft1.43: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 137, in test_into_currencyList
+    self.page.click_currencyList()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 226, in click_currencyList
+    self.click_settings()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 119, in click_settings
+    self.find_element (*self.settings).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;span&gt;...&lt;/span&gt; is not clickable at point (45, 789). Other element would receive the click: &lt;div class="el-loading-mask el-loading-fade-leave-active el-loading-fade-leave-to" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.44' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_freightList</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.44')" >
+        错误</a>
+
+    <div id='div_ft1.44' class="popup_window">
+        <pre>ft1.44: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 139, in test_into_freightList
+    self.page.click_freightList()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 230, in click_freightList
+    self.click_settings()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 119, in click_settings
+    self.find_element (*self.settings).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;span&gt;...&lt;/span&gt; is not clickable at point (45, 789). Other element would receive the click: &lt;div class="el-loading-mask el-loading-fade-leave-active el-loading-fade-leave-to" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.45' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_baseCategory</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.45')" >
+        错误</a>
+
+    <div id='div_ft1.45' class="popup_window">
+        <pre>ft1.45: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 141, in test_into_baseCategory
+    self.page.click_baseCategory()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 234, in click_baseCategory
+    self.click_settings()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 119, in click_settings
+    self.find_element (*self.settings).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;span&gt;...&lt;/span&gt; is not clickable at point (45, 789). Other element would receive the click: &lt;div class="el-loading-mask el-loading-fade-leave-active el-loading-fade-leave-to" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.46' class='none'>
+    <td class='errorCase'><div class='testcase'>test_into_shipping</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.46')" >
+        错误</a>
+
+    <div id='div_ft1.46' class="popup_window">
+        <pre>ft1.46: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_mainMenu.py", line 129, in test_into_shipping
+    self.page.click_shipping()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 210, in click_shipping
+    self.click_settings()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\home_page.py", line 119, in click_settings
+    self.find_element (*self.settings).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;span&gt;...&lt;/span&gt; is not clickable at point (45, 789). Other element would receive the click: &lt;div class="el-loading-mask el-loading-fade-leave-active el-loading-fade-leave-to" style=""&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.47' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_specialCategory</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>src.test.case.test_orderListPage.testOrderList</td>
+        <td>5</td>
+        <td>1</td>
+        <td>0</td>
+        <td>4</td>
+        <td><a href="javascript:showClassDetail('c2',5)">详情</a></td>
+    </tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_into_viewOrderDetails</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='ft2.2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_viewOrdinaryOrderDetails</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.2')" >
+        错误</a>
+
+    <div id='div_ft2.2' class="popup_window">
+        <pre>ft2.2: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_orderListPage.py", line 40, in test_viewOrdinaryOrderDetails
+    self.page.viewOrdinaryOrderDetails()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\orderList_page.py", line 39, in viewOrdinaryOrderDetails
+    self.find_element (*self.OrdinaryOrder).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;li data-v-48c96d76="" class="el-select-dropdown__item selected"&gt;...&lt;/li&gt; is not clickable at point (86, 134). Other element would receive the click: &lt;div class="el-select-dropdown el-popper el-zoom-in-top-enter el-zoom-in-top-enter-active" style="min-width: 110px; position: absolute; top: 122px; left: 293px; transform-origin: center top; z-index: 2002;" x-placement="bottom-start"&gt;...&lt;/div&gt;
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft2.3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_viewParentOrderDetails</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.3')" >
+        错误</a>
+
+    <div id='div_ft2.3' class="popup_window">
+        <pre>ft2.3: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_orderListPage.py", line 42, in test_viewParentOrderDetails
+    self.page.viewParentOrderDetails()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\orderList_page.py", line 49, in viewParentOrderDetails
+    self.find_element (*self.ParentOrder).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementNotInteractableException: Message: element not interactable
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft2.4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_viewChildOrderDetails</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.4')" >
+        错误</a>
+
+    <div id='div_ft2.4' class="popup_window">
+        <pre>ft2.4: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_orderListPage.py", line 44, in test_viewChildOrderDetails
+    self.page.viewChildOrderDetails()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\orderList_page.py", line 62, in viewChildOrderDetails
+    self.find_element (*self.ChildOrder).click ()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementNotInteractableException: Message: element not interactable
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft2.5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_viewPaypalOrderDetails</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.5')" >
+        错误</a>
+
+    <div id='div_ft2.5' class="popup_window">
+        <pre>ft2.5: Traceback (most recent call last):
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\case\test_orderListPage.py", line 46, in test_viewPaypalOrderDetails
+    self.page.viewPaypalOrderDetails()
+  File "F:\gitfile\OpshopAdmin_UI_AutoTest\src\test\page\orderList_page.py", line 71, in viewPaypalOrderDetails
+    self.find_element(*self.payment_Paypal).click()
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "D:\Anaconda3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementNotInteractableException: Message: element not interactable
+  (Session info: chrome=75.0.3770.80)
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>src.test.case.test_shareCount.testShareCount</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c3',2)">详情</a></td>
+    </tr>
+
+<tr id='pt3.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_Thailand_ChannelCount</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt3.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_Thailand_ProductRanking</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+        <tr id='total_row'>
+            <td>总计</td>
+            <td>54</td>
+            <td>25</td>
+            <td>0</td>
+            <td>29</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+
+        <div id='ending'>&nbsp;</div>
+        
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title : {
+                text: '测试执行情况',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            color: ['#95b75d', 'grey', '#b64645'],
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['通过','失败','错误']
+            },
+            series : [
+                {
+                    name: '测试执行情况',
+                    type: 'pie',
+                    radius : '60%',
+                    center: ['50%', '60%'],
+                    data:[
+                        {value:25, name:'通过'},
+                        {value:0, name:'失败'},
+                        {value:29, name:'错误'}
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    
+    </div>
+</body>
+</html>

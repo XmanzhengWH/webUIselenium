@@ -1,0 +1,114 @@
+
+---
+#index[0]
+#"""login"""
+    username_input: .el-form-item:nth-child(2) .el-input__inner
+    password_input: .el-input-group > .el-input__inner
+    login_button: .login-btn
+    clear_button: //div[@id='app']/div/form/div/div/div/span[2]/span/i
+    clear_button2: //div[@id='app']/div/form/div[2]/div/div/span[2]/span/i
+    see_pd_button: .fa-eye-slash
+    click_form: .el-form
+    peson_down: //div[@id='app']/div/div[2]/div/div[2]/div/span/i
+    logout_button: //body/ul/li[3]
+---
+#index[1]
+#    """home_menu"""
+    opshopImg: img
+    member: //div[@id='app']/div/div/ul/div[2]/li/div
+    product: //div[@id='app']/div/div/ul/div[3]/li/div
+    order: //div[@id='app']/div/div/ul/div[4]/li/div
+    imagesearch: //div[@id='app']/div/div/ul/div[5]/div/li
+    datastatistics: //div[@id='app']/div/div/ul/div[6]/li/div/span
+    couponList: //div[@id='app']/div/div/ul/div[7]/div/li
+    operation: //div[@id='app']/div/div/ul/div[8]/li/div/span
+    dictionary: //div[@id='app']/div/div/ul/div[9]/div/li
+    settings: //div[@id='app']/div/div/ul/div[10]/li/div/span
+    backend: //div[@id='app']/div/div/ul/div[11]/li/div
+---
+#index[2]
+#    """setting模块"""
+    externalCategory: //div[@id='app']/div/div/ul/div[10]/li/ul/div/li
+    areaManage: //div[@id='app']/div/div/ul/div[10]/li/ul/div[2]/li
+    countryList: //div[@id='app']/div/div/ul/div[10]/li/ul/div[3]/li
+    currencyList: //div[@id='app']/div/div/ul/div[10]/li/ul/div[4]/li
+    freightList: //div[@id='app']/div/div/ul/div[10]/li/ul/div[5]/li
+    baseCategory: //div[@id='app']/div/div/ul/div[10]/li/ul/div[6]/li
+    shipping: //div[@id='app']/div/div/ul/div[10]/li/ul/div[7]/li
+    specialCategory: //div[@id='app']/div/div/ul/div[10]/li/ul/div[8]/li
+  #    """member模块"""
+    memberlist: //div[@id='app']/div/div/ul/div[2]/li/ul/div/li
+    mymember: //div[@id='app']/div/div/ul/div[2]/li/ul/div[2]/li
+    memberReview: //div[@id='app']/div/div/ul/div[2]/li/ul/div[3]/li
+  #"""Product模块"""
+    productlist: //div[@id='app']/div/div/ul/div[3]/li/ul/div/li
+    productSpecification: //div[@id='app']/div/div/ul/div[3]/li/ul/div[2]/li
+    productAttribute: //div[@id='app']/div/div/ul/div[3]/li/ul/div[3]/li
+    productCollection: //div[@id='app']/div/div/ul/div[3]/li/ul/div[4]/li
+    productStore: //div[@id='app']/div/div/ul/div[3]/li/ul/div[5]/li
+    productPreQc: //div[@id='app']/div/div/ul/div[3]/li/ul/div[6]/li
+    #"""Order模块"""
+    orderList: //div[@id='app']/div/div/ul/div[4]/li/ul/div/li
+    orderReview: //div[@id='app']/div/div/ul/div[4]/li/ul/div[2]/li
+    abnormalOrder: //div[@id='app']/div/div/ul/div[4]/li/ul/div[3]/li
+#    """dataManage模块"""
+    couponStatistics: //div[@id='app']/div/div/ul/div[6]/li/ul/div/li
+    PromotionStatistics: //div[@id='app']/div/div/ul/div[6]/li/ul/div[2]/li
+    shareCount: //div[@id='app']/div/div/ul/div[6]/li/ul/div[3]/li
+#    """operation模块"""
+    frontendCategory: //div[@id='app']/div/div/ul/div[8]/li/ul/div/li
+    homepageSettings: //div[@id='app']/div/div/ul/div[8]/li/ul/div[2]/li
+    guidePage: //div[@id='app']/div/div/ul/div[8]/li/ul/div[3]/li
+    pushMessage: //div[@id='app']/div/div/ul/div[8]/li/ul/div[4]/li
+#    """Backend模块"""
+    dataDictionary: //div[@id='app']/div/div/ul/div[11]/li/ul/div/li
+    userlist: //div[@id='app']/div/div/ul/div[11]/li/ul/div[2]/li
+    rolemanage: //div[@id='app']/div/div/ul/div[11]/li/ul/div[3]/li
+    menumanage: //div[@id='app']/div/div/ul/div[11]/li/ul/div[4]/li
+    operationLogs: //div[@id='app']/div/div/ul/div[11]/li/ul/div[5]/li
+---
+    #index[3]
+#    orderList_page
+    inputType: // input[ @ type = 'text']
+    viewOrderDetails: //a[contains(text(),'View')]
+    viewOrderDetails2: (//a[contains(text(),'View')])[2]
+    OrdinaryOrder: //li[contains(.,'Ordinary Order')]
+    ParentOrder: //li[contains(.,'Parent Order')]
+    viewP2COrder: //div[@id='app']/div/div[2]/div[2]/div/div[2]/div/div[3]/table/tbody/tr/td/div/div/i
+    ChildOrder: //li[contains(.,'Child Order')]
+    inputOrderId: //input[@type='number']
+    searchButton: //span[contains(.,'Search')]
+    cancleButon: //a[contains(text(),'Cancle')]
+    paymentMethod_select: //div[@id='app']/div/div[2]/div[2]/div/div/form/div[2]/div/div/div/input
+    payment_Paypal: //body/div[3]/div/div/ul/li[2]
+---
+     #index[4]
+    #shareCount_page
+    selectCountry: //div[@id='app']/div/div[2]/div[2]/div/div/div/div[2]/div/div/input
+    selectThailand : //body/div[2]/div/div/ul/li
+    selectIndonesia : //body/div[2]/div/div/ul/li[2]
+    selectUnitedStates : //body/div[2]/div/div/ul/li[3]
+    selectChina : //body/div[2]/div/div/ul/li[5]
+    selectPakistan : //body/div[2]/div/div/ul/li[4]
+
+    PRselectIndex: //div[2]/div[2]/div/div/input
+    PRselectPV: //span[contains(.,'PV')]
+    PRselectUV: //span[contains(.,'UV')]
+    PRselectShare: //span[contains(.,'Share')]
+    PRselectCreateOrder: //span[contains(.,'Create Order')]
+    PRsearchPRButton: //span[contains(.,'Search')]
+
+    CCselectIndex: //div[5]/div/div[2]/div[2]/div[2]/div/div/input
+    CCselectAll: //li[contains(.,'ALL')]
+    CCselectCopylink: //li[contains(.,'Copy Link')]
+    CCselectInstagram: //li[contains(.,'Instagram')]
+    CCselectLine: //li[contains(.,'Line')]
+    CCselectTwitter: //li[contains(.,'Twitter')]
+    CCselectFacebook: //li[contains(.,'Facebook')]
+    CCsearchButton: //div[5]/div/div[2]/div[3]/button/span
+
+
+
+
+
+---

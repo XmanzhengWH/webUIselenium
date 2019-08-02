@@ -1,0 +1,41 @@
+#How to use : https://blog.csdn.net/huilan_same/article/details/52625230
+---
+#index[0]
+#mainhost: http://opshopadmin_dev/#
+mainhost: http://testadmin/#
+
+loginUrl: /login
+homeUrl: /home
+settingsUrl: /settings
+externalCategoryUrl: /settings/externalCategory
+
+
+Uname:
+Pwd:
+log:
+    file_name: test.log
+    backup: 5
+    console_level: WARNING
+    file_level: DEBUG
+    pattern: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+---
+#index[1]
+orderV2:
+orderV2form:
+    cartItemIds:
+    addressId:
+    payMethod:
+
+---
+#index[2]
+OrdinaryOrderID: 101705
+ParentOrderID: 101660
+ChildOrderID: 101393
+
+
+
+---
+
+
+
+
